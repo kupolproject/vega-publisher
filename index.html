@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VEGA Publisher Lite — автопостинг в Telegram без облаков</title>
+<meta name="description" content="Локальная программа для автопостинга в Telegram-каналы. Очередь постов на недели вперёд. Без подписок, без облаков, токен бота остаётся у тебя. $50 навсегда.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Manrope:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0D1420; --surface:#16202E; --surface2:#1C2A3C; --line:#243447;
+  --text:#E8EEF5; --muted:#8CA0B3; --accent:#38B6FF; --cta:#22C55E; --cta-dark:#16A34A;
+  --mono:'JetBrains Mono',monospace; --display:'Unbounded',sans-serif; --body:'Manrope',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--body);font-size:17px;line-height:1.6}
+.wrap{max-width:1060px;margin:0 auto;padding:0 24px}
+a{color:var(--accent)}
+h1,h2{font-family:var(--display);line-height:1.15;font-weight:700}
+h1{font-size:clamp(28px,4.6vw,46px)}
+h2{font-size:clamp(22px,3vw,32px);margin-bottom:28px}
+.eyebrow{font-family:var(--mono);font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:14px}
+section{padding:72px 0}
+.btn{display:inline-block;background:var(--cta);color:#04120A;font-weight:700;font-size:17px;padding:15px 32px;border-radius:10px;text-decoration:none;transition:background .15s}
+.btn:hover{background:var(--cta-dark);color:#fff}
+.btn.ghost{background:transparent;color:var(--accent);border:1px solid var(--accent)}
+.btn.ghost:hover{background:rgba(56,182,255,.1)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+/* HERO */
+.hero{padding:88px 0 72px;display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center}
+.hero p.lead{color:var(--muted);font-size:19px;margin:20px 0 32px;max-width:44ch}
+.hero .btns{display:flex;gap:14px;flex-wrap:wrap}
+.hero .note{font-family:var(--mono);font-size:13px;color:var(--muted);margin-top:18px}
+
+/* QUEUE MOCK — signature element */
+.queue{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px;box-shadow:0 24px 60px rgba(0,0,0,.4)}
+.queue .qhead{display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:13px;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:12px;margin-bottom:14px}
+.qdot{width:8px;height:8px;border-radius:50%;background:var(--cta);display:inline-block;margin-right:7px;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+.post{display:flex;gap:12px;align-items:flex-start;padding:11px 12px;border-radius:9px;background:var(--surface2);margin-bottom:9px;opacity:0;animation:slidein .5s forwards}
+.post:nth-child(2){animation-delay:.15s}.post:nth-child(3){animation-delay:.3s}.post:nth-child(4){animation-delay:.45s}
+@keyframes slidein{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.ptime{font-family:var(--mono);font-size:13px;color:var(--accent);white-space:nowrap;padding-top:2px}
+.pbody{font-size:14px;color:var(--text)}
+.pbody small{display:block;color:var(--muted);font-size:12.5px;margin-top:3px}
+.pstat{margin-left:auto;font-family:var(--mono);font-size:12px;white-space:nowrap;padding-top:3px}
+.ok{color:var(--cta)} .wait{color:var(--muted)}
+@media (prefers-reduced-motion: reduce){.post{animation:none;opacity:1}.qdot{animation:none}}
+
+/* PAIN */
+.pain{background:var(--surface);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.pain p{max-width:62ch;color:var(--muted);font-size:18px}
+.pain strong{color:var(--text)}
+
+/* FEATURES */
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:26px}
+.card h3{font-size:18px;margin-bottom:10px}
+.card p{color:var(--muted);font-size:15.5px}
+.card .ic{font-family:var(--mono);color:var(--accent);font-size:13px;letter-spacing:.1em;margin-bottom:14px;display:block}
+
+/* STEPS */
+.steps{counter-reset:s}
+.step{display:flex;gap:22px;padding:22px 0;border-bottom:1px solid var(--line)}
+.step:last-child{border-bottom:none}
+.step::before{counter-increment:s;content:counter(s,decimal-leading-zero);font-family:var(--mono);color:var(--accent);font-size:15px;padding-top:3px}
+.step h3{font-size:18px;margin-bottom:6px}
+.step p{color:var(--muted);font-size:15.5px;max-width:58ch}
+
+/* PRICE */
+.price{background:var(--surface);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.pricebox{max-width:520px;margin:0 auto;background:var(--surface2);border:1px solid var(--accent);border-radius:16px;padding:38px;text-align:center}
+.pricebox .num{font-family:var(--display);font-size:52px;font-weight:700}
+.pricebox .per{color:var(--muted);font-size:15px;margin-bottom:22px}
+.pricebox ul{list-style:none;text-align:left;margin:0 auto 28px;max-width:340px;color:var(--muted);font-size:15.5px}
+.pricebox li{padding:7px 0 7px 26px;position:relative}
+.pricebox li::before{content:"✓";color:var(--cta);position:absolute;left:0;font-weight:700}
+.guarantee{font-size:13.5px;color:var(--muted);margin-top:16px}
+
+/* FAQ */
+details{border-bottom:1px solid var(--line);padding:16px 0}
+summary{cursor:pointer;font-weight:700;font-size:16.5px;list-style:none}
+summary::after{content:"+";float:right;color:var(--accent);font-family:var(--mono)}
+details[open] summary::after{content:"–"}
+details p{color:var(--muted);font-size:15.5px;margin-top:10px;max-width:64ch}
+
+footer{padding:44px 0;border-top:1px solid var(--line);color:var(--muted);font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px}
+
+@media(max-width:820px){
+  .hero{grid-template-columns:1fr;padding-top:56px}
+  .grid3{grid-template-columns:1fr}
+  section{padding:56px 0}
+}
+</style>
+</head>
+<body>
+
+<div class="wrap hero">
+  <div>
+    <div class="eyebrow">Локальный инструмент · Windows</div>
+    <h1>Неделя постов в твой Telegram‑канал — за 10 минут</h1>
+    <p class="lead">VEGA Publisher Lite публикует посты по расписанию с твоего компьютера. Без облаков, без подписок, без доступа чужих сервисов к твоему боту.</p>
+    <div class="btns">
+      <a class="btn" href="#price">Купить за $50</a>
+      <a class="btn ghost" href="#demo">Смотреть демо 40 сек</a>
+    </div>
+    <p class="note">разовая оплата · лицензия навсегда · токен бота остаётся у тебя</p>
+  </div>
+  <div class="queue" aria-label="Пример очереди постов">
+    <div class="qhead"><span><span class="qdot"></span>очередь активна</span><span>@your_channel</span></div>
+    <div class="post"><span class="ptime">08:00</span><span class="pbody">Утренний пост<small>текст + картинка</small></span><span class="pstat ok">опубликован</span></div>
+    <div class="post"><span class="ptime">12:00</span><span class="pbody">Видео дня<small>mp4 · 15 MB</small></span><span class="pstat ok">опубликован</span></div>
+    <div class="post"><span class="ptime">21:00</span><span class="pbody">Вечерний пост<small>текст + картинка</small></span><span class="pstat wait">в очереди</span></div>
+    <div class="post"><span class="ptime">завтра 08:00</span><span class="pbody">Пост №14 из очереди<small>запланирован</small></span><span class="pstat wait">в очереди</span></div>
+  </div>
+</div>
+
+<section class="pain">
+  <div class="wrap">
+    <div class="eyebrow">Проблема</div>
+    <h2>Ручной постинг съедает 1–2 часа каждый день</h2>
+    <p>Каждое утро открыть Telegram, найти заготовку, прикрепить картинку, опубликовать. Потом вечером снова. Пропустил день — <strong>охваты просели</strong>. Облачные сервисы постинга просят <strong>токен твоего бота и ежемесячную подписку</strong>. VEGA Publisher Lite решает это иначе: программа работает на твоём компьютере, платишь один раз.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Что внутри</div>
+    <h2>Три причины, почему это удобно</h2>
+    <div class="grid3">
+      <div class="card"><span class="ic">ОЧЕРЕДЬ</span><h3>Посты на недели вперёд</h3><p>Загрузи текст и картинки, задай время — программа опубликует всё сама, точно по расписанию.</p></div>
+      <div class="card"><span class="ic">ЛОКАЛЬНО</span><h3>Токен никуда не уходит</h3><p>Твой бот, твой компьютер, твой контент. Никакие облачные сервисы не получают доступ к каналу.</p></div>
+      <div class="card"><span class="ic">БЕЗ ПОДПИСОК</span><h3>$50 один раз — навсегда</h3><p>Никаких ежемесячных платежей. Купил — пользуешься на любом количестве своих каналов.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="demo">
+  <div class="wrap">
+    <div class="eyebrow">Как это работает</div>
+    <h2>Запуск за 5 минут</h2>
+    <!-- Вставь сюда демо-видео: <video controls src="demo.mp4" style="width:100%;border-radius:14px;margin-bottom:32px"></video> -->
+    <div class="steps">
+      <div class="step"><div><h3>Создай бота через @BotFather</h3><p>Две минуты по инструкции из комплекта. Бот принадлежит тебе, токен хранится только у тебя.</p></div></div>
+      <div class="step"><div><h3>Вставь токен и имя канала в настройки</h3><p>Один файл, два поля. Дальше двойной клик по start.bat — программа готова.</p></div></div>
+      <div class="step"><div><h3>Наполни очередь и займись своими делами</h3><p>Посты выходят сами. Компьютер был выключен в момент публикации — пост выйдет при следующем запуске.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="price" id="price">
+  <div class="wrap">
+    <div class="pricebox">
+      <div class="num">$50</div>
+      <div class="per">разовая оплата · без подписки</div>
+      <ul>
+        <li>Программа VEGA Publisher Lite (Windows)</li>
+        <li>Инструкция установки на русском</li>
+        <li>Инструкция по созданию бота</li>
+        <li>Обновления версии Lite</li>
+        <li>Личная поддержка в Telegram</li>
+      </ul>
+      <a class="btn" href="https://t.me/gozhinskiy">Написать и купить</a>
+      <p class="guarantee">Оплата: карта (Украина) или USDT. Не запустилось по инструкции — помогу лично или верну деньги в течение 7 дней.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Вопросы</div>
+    <h2>Частые вопросы</h2>
+    <details><summary>Это облачный сервис?</summary><p>Нет. Это программа на твоём компьютере. В этом её суть: контент и токен бота не проходят через чужие серверы. Посты публикуются, пока программа запущена; пропущенные слоты она добирает при следующем запуске.</p></details>
+    <details><summary>Нужно уметь программировать?</summary><p>Нет. Установка — по пошаговой инструкции: поставить Python (галочка «Add to PATH»), вставить токен, запустить start.bat.</p></details>
+    <details><summary>Сколько каналов можно вести?</summary><p>Лицензия на тебя, а не на канал — веди все свои каналы.</p></details>
+    <details><summary>Как оплатить без карты иностранного банка?</summary><p>Карта украинского банка или USDT-перевод. Напиши в Telegram — договоримся за минуту.</p></details>
+    <details><summary>Что если не разберусь?</summary><p>Пишешь мне в Telegram — помогаю лично. Не запустилось совсем — возврат в течение 7 дней.</p></details>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>VEGA Publisher Lite · 2026</span>
+    <span>Контакт: <a href="https://t.me/gozhinskiy">@gozhinskiy</a></span>
+  </div>
+</footer>
+
+</body>
+</html>
