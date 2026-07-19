@@ -3,8 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VEGA Publisher Lite — автопостинг в Telegram без облаков</title>
-<meta name="description" content="Локальная программа для автопостинга в Telegram-каналы. Очередь постов на недели вперёд. Без подписок, без облаков, токен бота остаётся у тебя. Пилотная цена $49.">
+<title>Автопостинг в Telegram для Windows — VEGA Publisher Lite</title>
+<meta name="description" content="VEGA Publisher Lite — локальная Windows-программа для автоматической публикации постов в Telegram-канал. Расписание, очередь, dry-run и работа без облачной подписки.">
+<link rel="canonical" href="https://kupolproject.github.io/vega-publisher/">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Автопостинг в Telegram для Windows — VEGA Publisher Lite">
+<meta property="og:description" content="Локальная Windows-программа для автоматической публикации постов в Telegram-канал по расписанию, без облачной подписки.">
+<meta property="og:url" content="https://kupolproject.github.io/vega-publisher/">
+<meta property="og:site_name" content="VEGA Publisher Lite">
+<meta property="og:locale" content="ru_RU">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Автопостинг в Telegram для Windows — VEGA Publisher Lite">
+<meta name="twitter:description" content="Локальная Windows-программа для автоматической публикации постов в Telegram-канал по расписанию, без облачной подписки.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Manrope:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -112,6 +123,8 @@ summary::after{content:"+";float:right;color:var(--accent);font-family:var(--mon
 details[open] summary::after{content:"–"}
 details p{color:var(--muted);font-size:15.5px;margin-top:10px;max-width:64ch}
 
+.seo-block p{max-width:66ch;color:var(--muted);font-size:15.5px;margin-bottom:14px}
+
 footer{padding:44px 0;border-top:1px solid var(--line);color:var(--muted);font-size:14px}
 footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px}
 
@@ -128,15 +141,32 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px}
   .trust .wrap{gap:8px 16px}
 }
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "VEGA Publisher Lite",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Windows",
+  "softwareVersion": "RC1",
+  "url": "https://kupolproject.github.io/vega-publisher/",
+  "description": "Локальная Windows-программа для автоматической публикации постов в Telegram-канал по расписанию, без облачной подписки.",
+  "offers": {
+    "@type": "Offer",
+    "price": "49",
+    "priceCurrency": "USD"
+  }
+}
+</script>
 </head>
 <body>
 
-<div class="rc-banner">RC1 · Release Candidate — первые реальные пользователи. Не финальный публичный релиз, а проверенная рабочая версия с личной поддержкой и возвратом денег.</div>
+<div class="rc-banner">RC1 · Release Candidate — первые реальные пользователи. Не финальный публичный релиз, а проверенная рабочая версия с демо и dry-run до оплаты и личной поддержкой на старте.</div>
 
 <div class="wrap hero">
   <div>
     <div class="eyebrow">Локальный инструмент · Windows · EXE, Python не нужен</div>
-    <h1>Неделя постов в твой Telegram‑канал — за 10 минут</h1>
+    <h1>Автопостинг в Telegram с Windows-компьютера — очередь постов за 10 минут</h1>
     <p class="lead">VEGA Publisher Lite публикует посты по расписанию с твоего компьютера. Без облаков, без подписок, без доступа чужих сервисов к твоему боту.</p>
     <div class="btns">
       <a class="btn" href="https://t.me/robertgrin">Получить демо и обсудить подключение</a>
@@ -159,7 +189,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px}
     <span class="item">Токен бота остаётся у тебя</span>
     <span class="item">Есть безопасный --dry-run</span>
     <span class="item">ZIP проверяется по SHA256</span>
-    <span class="item">Возврат в течение 7 дней</span>
+    <span class="item">Демо и dry-run до оплаты</span>
   </div>
 </div>
 
@@ -210,7 +240,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px}
         <li>EXE не подписан цифровой подписью — Windows SmartScreen предупредит об этом при первом запуске. Проверяй SHA256 полученного ZIP перед распаковкой.</li>
         <li>Настройки и state хранятся локально в <code>%LOCALAPPDATA%\VEGA_Publisher_Lite\</code>, журнал публикаций — в <code>publish_log.jsonl</code> рядом.</li>
         <li>Не запускай несколько копий программы одновременно на одном боте.</li>
-        <li>Не разобрался или не подошло — пишешь мне лично в Telegram, помогаю или возвращаю деньги в течение 7 дней.</li>
+        <li>Не разобрался — пишешь мне лично в Telegram, помогаю разобраться. Оплата окончательная, поэтому демо и dry-run стоит проверить до оплаты, а не после.</li>
       </ul>
     </div>
   </div>
@@ -230,7 +260,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px}
         <li>Личная поддержка в Telegram напрямую от автора</li>
       </ul>
       <a class="btn" href="https://t.me/robertgrin">Получить демо и обсудить подключение</a>
-      <p class="guarantee">Оплата и запуск обсуждаются в Telegram: карта (Украина) или USDT. Не запустилось по инструкции — помогу лично или верну деньги в течение 7 дней.</p>
+      <p class="guarantee">Оплата и запуск обсуждаются в Telegram: карта (Украина) или USDT. Оплата окончательная, возвраты не предусмотрены — до оплаты можно посмотреть демонстрацию продукта и проверить сценарий работы через dry-run.</p>
     </div>
   </div>
 </section>
@@ -241,10 +271,21 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px}
     <h2>Частые вопросы</h2>
     <details><summary>Это облачный сервис?</summary><p>Нет. Это программа на твоём компьютере. В этом её суть: контент и токен бота не проходят через чужие серверы. Посты публикуются, пока программа запущена; пропущенные слоты она добирает при следующем запуске.</p></details>
     <details><summary>Нужно уметь программировать или ставить Python?</summary><p>Нет. RC1 — это готовый Windows-EXE. Python устанавливать не нужно. Скачал, вставил токен бота, запустил — по пошаговой инструкции из комплекта.</p></details>
-    <details><summary>Что такое RC1 и почему не финальная версия?</summary><p>RC1 значит Release Candidate — рабочая, проверенная версия для первых реальных пользователей. Так честнее, чем называть её «финальным продуктом»: обратная связь первых покупателей ещё повлияет на следующие обновления. Личная поддержка и возврат денег покрывают этот риск.</p></details>
+    <details><summary>Что такое RC1 и почему не финальная версия?</summary><p>RC1 значит Release Candidate — рабочая, проверенная версия для первых реальных пользователей. Так честнее, чем называть её «финальным продуктом»: обратная связь первых покупателей ещё повлияет на следующие обновления. Именно поэтому демо и dry-run доступны ещё до оплаты — чтобы решение было осознанным, а не на веру.</p></details>
     <details><summary>Сколько каналов можно вести?</summary><p>Лицензия на тебя, а не на канал — веди все свои каналы.</p></details>
     <details><summary>Как оплатить без карты иностранного банка?</summary><p>Карта украинского банка или USDT-перевод. Напиши в Telegram — договоримся за минуту.</p></details>
-    <details><summary>Что если не разберусь?</summary><p>Пишешь мне в Telegram — помогаю лично. Не запустилось совсем — возврат в течение 7 дней.</p></details>
+    <details><summary>Что если не разберусь?</summary><p>Пишешь мне в Telegram — помогаю лично разобраться с установкой и настройкой. Именно для этого перед оплатой есть демо и dry-run: они позволяют проверить сценарий работы заранее.</p></details>
+    <details><summary>Можно вернуть деньги, если не подойдёт?</summary><p>Нет, оплата окончательная, возвраты не предусмотрены ни при каких условиях. Поэтому решение стоит принимать после демо и проверки через dry-run, а не вслепую до оплаты.</p></details>
+  </div>
+</section>
+
+<section class="seo-block">
+  <div class="wrap">
+    <h2>Программа для автоматической публикации постов в Telegram</h2>
+    <p>VEGA Publisher Lite — программа для автопостинга в Telegram, локальный планировщик публикаций Telegram для Windows. Токен бота и очередь постов хранятся на твоём компьютере — это локальная автоматизация Telegram-канала, а не облачный сервис.</p>
+    <p>Программа отвечает за автоматическую публикацию постов в Telegram по заранее заданному расписанию: один раз загружаешь тексты и картинки, дальше публикация постов по расписанию в Telegram происходит сама, пока компьютер включён.</p>
+    <p>Чем это отличается от встроенных отложенных сообщений в самом Telegram: там каждый пост ставится в отложку вручную по одному, а здесь загружается сразу вся очередь на дни и недели вперёд, с журналом того, что реально опубликовано.</p>
+    <p>Подходит соло-авторам и небольшим Telegram-каналам, которые уже готовят контент заранее и хотят избавиться от рутины ручного постинга. Не подходит тем, кому нужна работа при выключенном компьютере — программа локальная, а не облачная, поэтому публикация идёт только пока компьютер включён.</p>
   </div>
 </section>
 
