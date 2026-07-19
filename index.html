@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>VEGA Publisher Lite — автопостинг в Telegram без облаков</title>
-<meta name="description" content="Локальная программа для автопостинга в Telegram-каналы. Очередь постов на недели вперёд. Без подписок, без облаков, токен бота остаётся у тебя. $50 навсегда.">
+<meta name="description" content="Локальная программа для автопостинга в Telegram-каналы. Очередь постов на недели вперёд. Без подписок, без облаков, токен бота остаётся у тебя. Пилотная цена $49.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Manrope:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -12,6 +12,7 @@
 :root{
   --bg:#0D1420; --surface:#16202E; --surface2:#1C2A3C; --line:#243447;
   --text:#E8EEF5; --muted:#8CA0B3; --accent:#38B6FF; --cta:#22C55E; --cta-dark:#16A34A;
+  --gold:#E8C468;
   --mono:'JetBrains Mono',monospace; --display:'Unbounded',sans-serif; --body:'Manrope',sans-serif;
 }
 *{margin:0;padding:0;box-sizing:border-box}
@@ -30,8 +31,12 @@ section{padding:72px 0}
 .btn.ghost:hover{background:rgba(56,182,255,.1)}
 :focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 
+/* TOP RC1 BANNER */
+.rc-banner{background:linear-gradient(90deg,rgba(232,196,104,.12),rgba(232,196,104,.03));border-bottom:1px solid rgba(232,196,104,.35);padding:11px 0;font-family:var(--mono);font-size:13px;color:var(--gold);text-align:center}
+.rc-banner b{color:var(--gold)}
+
 /* HERO */
-.hero{padding:88px 0 72px;display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center}
+.hero{padding:72px 0 72px;display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center}
 .hero p.lead{color:var(--muted);font-size:19px;margin:20px 0 32px;max-width:44ch}
 .hero .btns{display:flex;gap:14px;flex-wrap:wrap}
 .hero .note{font-family:var(--mono);font-size:13px;color:var(--muted);margin-top:18px}
@@ -51,6 +56,12 @@ section{padding:72px 0}
 .ok{color:var(--cta)} .wait{color:var(--muted)}
 @media (prefers-reduced-motion: reduce){.post{animation:none;opacity:1}.qdot{animation:none}}
 
+/* TRUST STRIP */
+.trust{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--surface)}
+.trust .wrap{display:flex;flex-wrap:wrap;gap:10px 28px;padding:20px 24px;justify-content:center}
+.trust .item{font-family:var(--mono);font-size:13px;color:var(--muted);display:flex;align-items:center;gap:8px;white-space:nowrap}
+.trust .item::before{content:"✓";color:var(--cta);font-weight:700}
+
 /* PAIN */
 .pain{background:var(--surface);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 .pain p{max-width:62ch;color:var(--muted);font-size:18px}
@@ -63,6 +74,12 @@ section{padding:72px 0}
 .card p{color:var(--muted);font-size:15.5px}
 .card .ic{font-family:var(--mono);color:var(--accent);font-size:13px;letter-spacing:.1em;margin-bottom:14px;display:block}
 
+/* DEMO VIDEO */
+.videobox{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:14px;margin-bottom:20px}
+.videobox video{width:100%;display:block;border-radius:10px;background:#000}
+.videocap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;font-family:var(--mono);font-size:12.5px;color:var(--muted);padding:12px 6px 2px}
+.videocap b{color:var(--text)}
+
 /* STEPS */
 .steps{counter-reset:s}
 .step{display:flex;gap:22px;padding:22px 0;border-bottom:1px solid var(--line)}
@@ -71,12 +88,19 @@ section{padding:72px 0}
 .step h3{font-size:18px;margin-bottom:6px}
 .step p{color:var(--muted);font-size:15.5px;max-width:58ch}
 
+/* RC1 HONEST BLOCK */
+.honest{background:var(--surface2);border:1px solid var(--line);border-radius:14px;padding:28px 30px;margin-top:36px}
+.honest h3{font-size:17px;margin-bottom:14px;color:var(--gold)}
+.honest ul{color:var(--muted);font-size:15px;padding-left:20px}
+.honest li{margin-bottom:8px}
+.honest code,.step code{overflow-wrap:anywhere;word-break:break-word}
+
 /* PRICE */
 .price{background:var(--surface);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 .pricebox{max-width:520px;margin:0 auto;background:var(--surface2);border:1px solid var(--accent);border-radius:16px;padding:38px;text-align:center}
 .pricebox .num{font-family:var(--display);font-size:52px;font-weight:700}
 .pricebox .per{color:var(--muted);font-size:15px;margin-bottom:22px}
-.pricebox ul{list-style:none;text-align:left;margin:0 auto 28px;max-width:340px;color:var(--muted);font-size:15.5px}
+.pricebox ul{list-style:none;text-align:left;margin:0 auto 28px;max-width:360px;color:var(--muted);font-size:15.5px}
 .pricebox li{padding:7px 0 7px 26px;position:relative}
 .pricebox li::before{content:"✓";color:var(--cta);position:absolute;left:0;font-weight:700}
 .guarantee{font-size:13.5px;color:var(--muted);margin-top:16px}
@@ -93,21 +117,30 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px}
 
 @media(max-width:820px){
   .hero{grid-template-columns:1fr;padding-top:56px}
+  .hero>div{min-width:0}
   .grid3{grid-template-columns:1fr}
   section{padding:56px 0}
+}
+@media(max-width:480px){
+  .post{flex-wrap:wrap;row-gap:4px}
+  .ptime{white-space:normal}
+  .pstat{white-space:normal;margin-left:0}
+  .trust .wrap{gap:8px 16px}
 }
 </style>
 </head>
 <body>
 
+<div class="rc-banner">RC1 · Release Candidate — первые реальные пользователи. Не финальный публичный релиз, а проверенная рабочая версия с личной поддержкой и возвратом денег.</div>
+
 <div class="wrap hero">
   <div>
-    <div class="eyebrow">Локальный инструмент · Windows</div>
+    <div class="eyebrow">Локальный инструмент · Windows · EXE, Python не нужен</div>
     <h1>Неделя постов в твой Telegram‑канал — за 10 минут</h1>
     <p class="lead">VEGA Publisher Lite публикует посты по расписанию с твоего компьютера. Без облаков, без подписок, без доступа чужих сервисов к твоему боту.</p>
     <div class="btns">
-      <a class="btn" href="#price">Купить за $50</a>
-      <a class="btn ghost" href="#demo">Смотреть демо 40 сек</a>
+      <a class="btn" href="https://t.me/robertgrin">Получить демо и обсудить подключение</a>
+      <a class="btn ghost" href="#demo">Смотреть демо (54 сек)</a>
     </div>
     <p class="note">разовая оплата · лицензия навсегда · токен бота остаётся у тебя</p>
   </div>
@@ -117,6 +150,16 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px}
     <div class="post"><span class="ptime">12:00</span><span class="pbody">Видео дня<small>mp4 · 15 MB</small></span><span class="pstat ok">опубликован</span></div>
     <div class="post"><span class="ptime">21:00</span><span class="pbody">Вечерний пост<small>текст + картинка</small></span><span class="pstat wait">в очереди</span></div>
     <div class="post"><span class="ptime">завтра 08:00</span><span class="pbody">Пост №14 из очереди<small>запланирован</small></span><span class="pstat wait">в очереди</span></div>
+  </div>
+</div>
+
+<div class="trust">
+  <div class="wrap">
+    <span class="item">EXE для Windows, Python не нужен</span>
+    <span class="item">Токен бота остаётся у тебя</span>
+    <span class="item">Есть безопасный --dry-run</span>
+    <span class="item">ZIP проверяется по SHA256</span>
+    <span class="item">Возврат в течение 7 дней</span>
   </div>
 </div>
 
@@ -135,7 +178,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px}
     <div class="grid3">
       <div class="card"><span class="ic">ОЧЕРЕДЬ</span><h3>Посты на недели вперёд</h3><p>Загрузи текст и картинки, задай время — программа опубликует всё сама, точно по расписанию.</p></div>
       <div class="card"><span class="ic">ЛОКАЛЬНО</span><h3>Токен никуда не уходит</h3><p>Твой бот, твой компьютер, твой контент. Никакие облачные сервисы не получают доступ к каналу.</p></div>
-      <div class="card"><span class="ic">БЕЗ ПОДПИСОК</span><h3>$50 один раз — навсегда</h3><p>Никаких ежемесячных платежей. Купил — пользуешься на любом количестве своих каналов.</p></div>
+      <div class="card"><span class="ic">БЕЗ ПОДПИСОК</span><h3>$49 пилотная цена — один раз</h3><p>Никаких ежемесячных платежей. Пилотная цена для первых пользователей, дальше пользуешься на любом количестве своих каналов.</p></div>
     </div>
   </div>
 </section>
@@ -143,12 +186,32 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px}
 <section id="demo">
   <div class="wrap">
     <div class="eyebrow">Как это работает</div>
-    <h2>Запуск за 5 минут</h2>
-    <!-- Вставь сюда демо-видео: <video controls src="demo.mp4" style="width:100%;border-radius:14px;margin-bottom:32px"></video> -->
+    <h2>Демо — реальный запуск программы</h2>
+    <div class="videobox">
+      <video controls playsinline preload="metadata">
+        <source src="assets/vega_demo_final.mp4" type="video/mp4">
+        Твой браузер не поддерживает воспроизведение видео. Скачать файл: <a href="assets/vega_demo_final.mp4">assets/vega_demo_final.mp4</a>.
+      </video>
+      <div class="videocap">
+        <span>Запись реального запуска VEGA Publisher Lite RC1</span>
+        <span><b>54 сек</b> · 1920×1080 · без звука — это ожидаемо, звука в записи экрана нет</span>
+      </div>
+    </div>
     <div class="steps">
-      <div class="step"><div><h3>Создай бота через @BotFather</h3><p>Две минуты по инструкции из комплекта. Бот принадлежит тебе, токен хранится только у тебя.</p></div></div>
-      <div class="step"><div><h3>Вставь токен и имя канала в настройки</h3><p>Один файл, два поля. Дальше двойной клик по start.bat — программа готова.</p></div></div>
-      <div class="step"><div><h3>Наполни очередь и займись своими делами</h3><p>Посты выходят сами. Компьютер был выключен в момент публикации — пост выйдет при следующем запуске.</p></div></div>
+      <div class="step"><div><h3>Скачай и запусти VegaPublisherLite.exe</h3><p>Ничего дополнительно ставить не нужно — это готовый Windows-EXE, Python не требуется. Windows SmartScreen может показать предупреждение о неизвестном издателе — это ожидаемо для RC1, EXE без цифровой подписи.</p></div></div>
+      <div class="step"><div><h3>Создай бота через @BotFather и вставь токен</h3><p>Две минуты по инструкции из комплекта. Бот принадлежит тебе, токен хранится только у тебя локально.</p></div></div>
+      <div class="step"><div><h3>Проверь через <code>--dry-run</code>, потом запусти публикацию</h3><p>Dry-run показывает выбранный слот и следующий пост без обращения к Telegram API — ничего не публикуется, пока ты не убедился, что всё настроено верно.</p></div></div>
+    </div>
+
+    <div class="honest">
+      <h3>Честно о статусе RC1</h3>
+      <ul>
+        <li>Это Release Candidate 1 — первая версия для реальных первых пользователей, не многолетний облачный сервис с миллионом пользователей.</li>
+        <li>EXE не подписан цифровой подписью — Windows SmartScreen предупредит об этом при первом запуске. Проверяй SHA256 полученного ZIP перед распаковкой.</li>
+        <li>Настройки и state хранятся локально в <code>%LOCALAPPDATA%\VEGA_Publisher_Lite\</code>, журнал публикаций — в <code>publish_log.jsonl</code> рядом.</li>
+        <li>Не запускай несколько копий программы одновременно на одном боте.</li>
+        <li>Не разобрался или не подошло — пишешь мне лично в Telegram, помогаю или возвращаю деньги в течение 7 дней.</li>
+      </ul>
     </div>
   </div>
 </section>
@@ -156,17 +219,18 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px}
 <section class="price" id="price">
   <div class="wrap">
     <div class="pricebox">
-      <div class="num">$50</div>
-      <div class="per">разовая оплата · без подписки</div>
+      <div class="num">$49</div>
+      <div class="per">пилотная цена · разовая оплата · без подписки</div>
       <ul>
-        <li>Программа VEGA Publisher Lite (Windows)</li>
-        <li>Инструкция установки на русском</li>
-        <li>Инструкция по созданию бота</li>
-        <li>Обновления версии Lite</li>
-        <li>Личная поддержка в Telegram</li>
+        <li>VEGA Publisher Lite (Windows EXE, RC1)</li>
+        <li>Инструкция установки и запуска на русском</li>
+        <li>Инструкция по созданию Telegram-бота</li>
+        <li>Помощь с первоначальной настройкой лично</li>
+        <li>Проверка через безопасный --dry-run перед стартом</li>
+        <li>Личная поддержка в Telegram напрямую от автора</li>
       </ul>
-      <a class="btn" href="https://t.me/gozhinskiy">Написать и купить</a>
-      <p class="guarantee">Оплата: карта (Украина) или USDT. Не запустилось по инструкции — помогу лично или верну деньги в течение 7 дней.</p>
+      <a class="btn" href="https://t.me/robertgrin">Получить демо и обсудить подключение</a>
+      <p class="guarantee">Оплата и запуск обсуждаются в Telegram: карта (Украина) или USDT. Не запустилось по инструкции — помогу лично или верну деньги в течение 7 дней.</p>
     </div>
   </div>
 </section>
@@ -176,7 +240,8 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px}
     <div class="eyebrow">Вопросы</div>
     <h2>Частые вопросы</h2>
     <details><summary>Это облачный сервис?</summary><p>Нет. Это программа на твоём компьютере. В этом её суть: контент и токен бота не проходят через чужие серверы. Посты публикуются, пока программа запущена; пропущенные слоты она добирает при следующем запуске.</p></details>
-    <details><summary>Нужно уметь программировать?</summary><p>Нет. Установка — по пошаговой инструкции: поставить Python (галочка «Add to PATH»), вставить токен, запустить start.bat.</p></details>
+    <details><summary>Нужно уметь программировать или ставить Python?</summary><p>Нет. RC1 — это готовый Windows-EXE. Python устанавливать не нужно. Скачал, вставил токен бота, запустил — по пошаговой инструкции из комплекта.</p></details>
+    <details><summary>Что такое RC1 и почему не финальная версия?</summary><p>RC1 значит Release Candidate — рабочая, проверенная версия для первых реальных пользователей. Так честнее, чем называть её «финальным продуктом»: обратная связь первых покупателей ещё повлияет на следующие обновления. Личная поддержка и возврат денег покрывают этот риск.</p></details>
     <details><summary>Сколько каналов можно вести?</summary><p>Лицензия на тебя, а не на канал — веди все свои каналы.</p></details>
     <details><summary>Как оплатить без карты иностранного банка?</summary><p>Карта украинского банка или USDT-перевод. Напиши в Telegram — договоримся за минуту.</p></details>
     <details><summary>Что если не разберусь?</summary><p>Пишешь мне в Telegram — помогаю лично. Не запустилось совсем — возврат в течение 7 дней.</p></details>
@@ -185,8 +250,8 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px}
 
 <footer>
   <div class="wrap">
-    <span>VEGA Publisher Lite · 2026</span>
-    <span>Контакт: <a href="https://t.me/gozhinskiy">@gozhinskiy</a></span>
+    <span>VEGA Publisher Lite · RC1 · 2026</span>
+    <span>Контакт: <a href="https://t.me/robertgrin">@robertgrin</a></span>
   </div>
 </footer>
 
