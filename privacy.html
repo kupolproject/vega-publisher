@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Политика конфиденциальности — VEGA Publisher Lite</title>
+<meta name="description" content="Как лендинг VEGA Publisher Lite использует Google Analytics и хранит выбор посетителя.">
+<link rel="canonical" href="https://kupolproject.github.io/vega-publisher/privacy.html">
+<meta name="robots" content="index,follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Manrope:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0D1420;--surface:#16202E;--line:#243447;--text:#E8EEF5;
+  --muted:#8CA0B3;--accent:#38B6FF;--cta:#22C55E;
+  --mono:'JetBrains Mono',monospace;--display:'Unbounded',sans-serif;
+  --body:'Manrope',sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.7 var(--body)}
+a{color:var(--accent)}
+.wrap{max-width:840px;margin:0 auto;padding:56px 24px 72px}
+.eyebrow{font:13px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+h1{font:700 clamp(28px,5vw,42px)/1.2 var(--display);margin:14px 0 18px}
+h2{font-size:21px;margin:32px 0 10px}
+p,li{color:var(--muted)}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:24px;margin:24px 0}
+.back,.reset{display:inline-block;border-radius:8px;padding:11px 16px;font-weight:700;text-decoration:none}
+.back{background:var(--cta);color:#04120A}
+.reset{background:transparent;color:var(--text);border:1px solid var(--line);cursor:pointer;font:700 14px var(--body)}
+.status{font:13px var(--mono);color:var(--muted);margin-left:10px}
+footer{margin-top:48px;padding-top:24px;border-top:1px solid var(--line);color:var(--muted);font-size:14px}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <div class="eyebrow">VEGA Publisher Lite</div>
+  <h1>Политика конфиденциальности</h1>
+  <p>Дата обновления: 23 июля 2026 года.</p>
+
+  <div class="panel">
+    <strong>Коротко</strong>
+    <p>Google Analytics используется только после согласия посетителя, чтобы считать посещения страниц и переходы на страницу покупки VEGA Publisher Lite на Gumroad.</p>
+    <p>Имена, email, Telegram username и другие контактные данные намеренно не добавляются в события аналитики.</p>
+  </div>
+
+  <h2>Какие данные измеряются</h2>
+  <ul>
+    <li>просмотры страниц и общее число посетителей;</li>
+    <li>источник и UTM-метки текущего перехода;</li>
+    <li>клик по ссылке на Gumroad и расположение кнопки на странице;</li>
+    <li>техническая информация браузера и устройства, которую Google Analytics собирает в стандартной конфигурации.</li>
+  </ul>
+
+  <h2>Согласие на аналитику</h2>
+  <p>По умолчанию <code>analytics_storage</code> имеет значение <code>denied</code>. После выбора «Разрешить аналитику» оно меняется на <code>granted</code>, и сайт отправляет page view и события кликов. Выбор сохраняется локально в браузере под ключом <code>vega_analytics_consent_v1</code>.</p>
+  <p>Кнопка «Только необходимые» сохраняет отказ. Рекламное хранилище и рекламная персонализация остаются отключёнными при любом выборе.</p>
+
+  <h2>Google Analytics и Gumroad</h2>
+  <p>Аналитические данные обрабатываются Google в соответствии с условиями Google Analytics. Переход на Gumroad открывает внешний сайт, где действует собственная политика конфиденциальности Gumroad.</p>
+  <p>
+    <a href="https://policies.google.com/privacy" rel="noopener noreferrer">Политика конфиденциальности Google</a><br>
+    <a href="https://gumroad.com/privacy" rel="noopener noreferrer">Политика конфиденциальности Gumroad</a>
+  </p>
+
+  <h2>Изменить выбор</h2>
+  <p>Можно удалить сохранённый выбор кнопкой ниже. При следующем открытии главной страницы баннер появится снова.</p>
+  <button id="reset-consent" class="reset" type="button">Сбросить выбор аналитики</button>
+  <span id="reset-status" class="status" aria-live="polite"></span>
+
+  <h2>Контакт</h2>
+  <p>Вопросы по сайту и продукту: <a href="https://t.me/robertgrin">@robertgrin</a>.</p>
+
+  <p><a class="back" href="./">Вернуться на сайт</a></p>
+
+  <footer>VEGA Publisher Lite · RC1 · 2026</footer>
+</main>
+<script>
+document.getElementById("reset-consent").addEventListener("click", function () {
+  try {
+    localStorage.removeItem("vega_analytics_consent_v1");
+    document.getElementById("reset-status").textContent = "Выбор удалён.";
+  } catch (_error) {
+    document.getElementById("reset-status").textContent = "Не удалось изменить локальное хранилище.";
+  }
+});
+</script>
+</body>
+</html>
